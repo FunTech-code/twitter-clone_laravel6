@@ -25,9 +25,9 @@ class TimelineController extends Controller
         ]);
 
         Tweet::create([
-            'user_id' => Auth::user()->id,
-            'name'    => Auth::user()->name,
-            'tweet'   => $request->tweet,
+            'user_id'   => Auth::user()->id,
+            'tweet'     => $request->tweet,
+            'image_url' => $request->image_url,
         ]);
 
         return back();

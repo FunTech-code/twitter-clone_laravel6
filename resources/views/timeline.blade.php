@@ -5,7 +5,6 @@
         {!! Form::open(['route' => 'timeline', 'method' => 'POST']) !!}
             {{ csrf_field() }}
             <div class="row mb-4">
-                {{-- 変更ここから --}}
                 @guest
                     <div class="mx-auto">
                         <a class="btn btn-primary" href="{{ route('login') }}">ログインしてツイートする</a>
@@ -13,9 +12,9 @@
                     </div>
                 @else
                     {{ Form::text('tweet', null, ['class' => 'form-control col-9 mr-auto']) }}
+                    {{ Form::file('image_url', ['class'=>'custom-file-input','id'=>'image_url']) }}
                     {{ Form::submit('ツイート', ['class' => 'btn btn-primary col-2']) }}
                 @endguest
-                {{-- 変更ここまで --}}
             </div>
             @if ($errors->has('tweet'))
                 <p class="alert alert-danger">{{ $errors->first('tweet') }}</p>

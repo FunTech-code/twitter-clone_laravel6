@@ -17,7 +17,7 @@ class CreateTweetsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->text('tweet');
-            $table->text('image_url');
+            $table->text('image_url')->nullable();
             $table->timestamps();
         });
     }

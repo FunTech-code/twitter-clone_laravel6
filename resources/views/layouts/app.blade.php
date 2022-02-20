@@ -65,7 +65,17 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                    
+                                    <a class="dropdown-item" href="{{ route('user') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('user-form').submit();">
+                                        {{ __('User Page') }}
+                                    </a>
+                                    
+                                    <form id="user-form" action="{{ route('user') }}" method="GEt" class="d-none">
                                         @csrf
                                     </form>
                                 </div>

@@ -8,7 +8,7 @@ class Tweet extends Model
 {
     protected $fillable = [
         'user_id',
-        'name',
         'tweet',
+        'image_url',
     ];
 }
