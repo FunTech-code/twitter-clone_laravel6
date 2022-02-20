@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use \App\Tweet;
 use \App\User;
 use Illuminate\Support\Facades\Auth;
+use \App\Http\Controllers\DB;
 
 class UserController extends Controller
 {
     //
     public function showUserPage()
     {
-        $user_param = ['name' => Auth::user()->name];
-        $user = User::select('select * from user where name = :name', $user_param);
-        $tweet_param = ['id' => $user->id];
+        //TODO:なんかIDとれていない？
+        $id = Tweet::select(
+            'select id from user where name = :name', ['name' => Auth::user()->name]
+        );
+        $tweet_param = ['id' => $id,];
         $tweets = Tweet::select('select * from tweet where user_id = :id', $tweet_param);
 
         return view('user', [
