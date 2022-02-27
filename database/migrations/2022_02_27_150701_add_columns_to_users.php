@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToTweets extends Migration
+class AddColumnsToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddColumnsToTweets extends Migration
      */
     public function up()
     {
-        Schema::table('tweets', function (Blueprint $table) {
-            $table->text('created_user');
-            $table->text('update_user');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('image_url')->nullable();
+            $table->string('created_user');
+            $table->string('update_user');
         });
     }
 
@@ -26,8 +27,8 @@ class AddColumnsToTweets extends Migration
      */
     public function down()
     {
-        Schema::table('tweets', function (Blueprint $table) {
-
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 }
