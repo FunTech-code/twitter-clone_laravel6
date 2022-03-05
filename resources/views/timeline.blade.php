@@ -6,10 +6,8 @@
             {{ csrf_field() }}
             <div class="row mb-4">
                 @guest
-                    <div class="mx-auto">
-                        <a class="btn btn-primary" href="{{ route('login') }}">ログインしてツイートする</a>
-                        <a class="btn btn-primary" href="{{ route('register') }}">新規登録してツイートする</a>
-                    </div>
+                <div class="col-sm-12">
+                    <table class="table table-bordered">
                 @else
                 <div class="col-sm-4">
                     @if (isset($user->image_url))
@@ -20,12 +18,12 @@
                     <strong>{{ $user->name }}</strong>
                     <br><br>
                     {{ Form::text('tweet', null, ['class' => 'form-control mr-auto']) }}
-                    {{ Form::file('image_url', ['class'=>'custom-file-input','id'=>'image_url']) }}
+                    {{ Form::file('image_url', ['id'=>'image_url']) }}
                     {{ Form::submit('ツイート', ['class' => 'btn btn-primary']) }}
                 </div>
-                @endguest
                 <div class="col-sm-8">
                     <table class="table table-bordered">
+                @endguest
                 @foreach ($tweets as $tweet)
                         <tr>
                             <td>

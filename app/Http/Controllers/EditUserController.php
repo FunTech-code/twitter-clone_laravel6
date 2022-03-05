@@ -37,7 +37,6 @@ class EditUserController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'tel_number' => $data['tel_number'],
-            'password' => Hash::make($data['password']),
             'update_user' => $data['name'],
             'profile' => $data['profile'],
             'image_url' => $data['image_url'],
