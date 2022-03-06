@@ -28,14 +28,15 @@ class TimelineController extends Controller
             'tweet' => ['string', 'required', 'max:140'],
             'Image_url' => ['string', 'max:200'],
         ]);
-
+        
         if(!empty($request['image_url'])){
-            $img = $request->image_url->store('img');
+            $filename = $request->image_url->getClientOriginalName();
+            $image_url = $request->image_url->storeAs('',$filename,'public');
         }
         Tweet::create([
             'user_id'   => Auth::user()->id,
             'tweet'     => $request->tweet,
-            'image_url' => $request->image_url,
+            'image_url' => $image_url,
             'created_user' => Auth::user()->name,
             'update_user' => Auth::user()->name,
         ]);
