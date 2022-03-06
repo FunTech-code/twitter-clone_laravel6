@@ -24,9 +24,14 @@ class TimelineController extends Controller
     public function postTweet(Request $request)
     {
         $request->validate([
-            'tweet' => 'required|max:140',
+            'user_id' => ['Integer', 'required'],
+            'tweet' => ['string', 'required', 'max:140'],
+            'Image_url' => ['string', 'max:200'],
         ]);
 
+        if(!empty($request['image_url'])){
+            $img = $request->image_url->store('img');
+        }
         Tweet::create([
             'user_id'   => Auth::user()->id,
             'tweet'     => $request->tweet,

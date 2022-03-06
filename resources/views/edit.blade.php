@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('EdidUser') }}</div>
 
                 <div class="card-body">
-                    {!! Form::open(['route' => 'editcomplete', 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => 'editcomplete', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                     {{ csrf_field() }}
                     
                     {{ Form::label('name','氏名')}}

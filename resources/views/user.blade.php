@@ -5,7 +5,7 @@
         <div class="row mb-3">
             <div class="col-sm-3">
                 @if (isset($user->image_url))
-                    <img src={{ $user->image_url }}><br>
+                    <img src={{ asset('storage/'.$user->image_url)}} width=100% height=auto><br>
                 @else
                     <img src="https://thumb.ac-illust.com/e2/e2cb85acf732de018702298367234d84_t.jpeg" width=100% height=auto><br>
                 @endif
