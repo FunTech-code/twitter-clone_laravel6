@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', 'UserController@showUserPage')->name('user');
 Route::get('/edituser', 'EditUserController@showEditUserPage')->name('edit');
-Route::post('/editcomplete', 'EditUserController@editUser')->name('editcomplete');
+Route::post('/editcomplete', 'EditUserController@editComplete')->name('editcomplete');
 
 Route::get('/timeline', 'TimelineController@showTimelinePage')->name('timeline');
 Route::post('/timeline', 'TimelineController@postTweet')->name('timeline');

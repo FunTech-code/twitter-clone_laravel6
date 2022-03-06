@@ -20,35 +20,32 @@ class EditUserController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  Request $request
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(Request $request)
     {
-        return Validator::make($data, [
+        return Validator::make($request, [
             'name' => ['required', 'string', 'max:50'],
             'profile' => ['required', 'string', 'max:200'],
         ]);
     }
 
-    public function editUser(array $data)
+    public function editComplete(Request $request)
     {
         $param = [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'tel_number' => $data['tel_number'],
-            'update_user' => $data['name'],
-            'profile' => $data['profile'],
-            'image_url' => $data['image_url'],
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'tel_number' => $request['tel_number'],
+            'update_user' => $request['name'],
+            'profile' => $request['profile'],
+            'image_url' => $request['image_url'],
             ];
-        User::where('id', Auth::user()->id)->update($param);
-
-        $user = DB::table('users')->where('id', Auth::user()->id)->first();
+        $user = DB::table('users')->where('id', Auth::user()->id)->update($param);
         $tweets = DB::table('tweets')->where('user_id', Auth::user()->id)->get();
-
         return view('user', [
-            'user' => $user,
-            'tweets' => $tweets,
-            ]);
+            'user' => $request,
+            'tweets' => $tweets
+        ]);
     }
 }
