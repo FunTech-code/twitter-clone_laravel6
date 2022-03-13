@@ -11,9 +11,7 @@ class TimelineController extends Controller
 {
     public function showTimelinePage()
     {
-        //$tweets = Tweet::latest()->paginate(5);
         $tweets = DB::table('tweets')->latest()->paginate(5);
-
 
         return view('timeline', [
             'user' => Auth::user(),
@@ -21,14 +19,24 @@ class TimelineController extends Controller
         ]);
     }
 
-    public function postTweet(Request $request)
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(Request $request)
     {
-        $request->validate([
+        return Validator::make($request, [
             'user_id' => ['Integer', 'required'],
             'tweet' => ['string', 'required', 'max:140'],
             'Image_url' => ['string', 'max:200'],
         ]);
-        
+    }
+
+    public function postTweet(Request $request)
+    {
+        $image_url = null;
         if(!empty($request['image_url'])){
             $filename = $request->image_url->getClientOriginalName();
             $image_url = $request->image_url->storeAs('',$filename,'public');
