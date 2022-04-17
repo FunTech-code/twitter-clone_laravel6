@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container mt-3">
+        @if (count($errors))
+            @foreach ($errors->all() as $error)
+            <p class="alert alert-danger">{{ $error }}</p>
+            @endforeach
+        @endif
         {!! Form::open(['route' => 'timeline', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             {{ csrf_field() }}
             <div class="row mb-4">
@@ -38,9 +43,6 @@
                     </table>
                 </div>
             </div>
-            @if ($errors->has('tweet'))
-                <p class="alert alert-danger">{{ $errors->first('tweet') }}</p>
-            @endif
         {!! Form::close() !!}
 
 

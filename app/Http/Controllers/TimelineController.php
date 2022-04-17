@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \App\Tweet;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class TimelineController extends Controller
 {
@@ -19,23 +20,24 @@ class TimelineController extends Controller
         ]);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  Request $request
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(Request $request)
-    {
-        return Validator::make($request, [
-            'user_id' => ['Integer', 'required'],
-            'tweet' => ['string', 'required', 'max:140'],
-            'Image_url' => ['string', 'max:200'],
-        ]);
-    }
-
     public function postTweet(Request $request)
     {
+        $rules = [
+            'tweet' => ['string', 'required', 'max:140'],
+            'image_url' => ['string', 'max:200'],
+        ];
+        $message = [
+            'tweet.required' => 'ツイートは必ず入力してください。',
+            'tweet.max:140' => 'ツイートは140文字以内で入力してください。',
+            'image_url.max:200' => '画像URLは200文字以内としてください。',
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+        if($validator->fails()){
+            return redirect('/timeline')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        
         $image_url = null;
         if(!empty($request['image_url'])){
             $filename = $request->image_url->getClientOriginalName();
