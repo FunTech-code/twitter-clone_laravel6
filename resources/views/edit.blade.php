@@ -37,6 +37,7 @@
                     {{ Form::label('profile','プロフィール')}}
                     {{ Form::text('profile', $user->profile, ['id'=>'profile','class' => 'form-control mr-auto']) }}
                     {{ Form::submit('EditUser', ['class' => 'btn btn-primary']) }}
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
